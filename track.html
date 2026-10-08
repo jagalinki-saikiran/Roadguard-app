@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Grievance Status | Civic Audit Portal</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #f4f6f9; color: #333; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .card { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); max-width: 480px; width: 100%; border-top: 5px solid #0056b3; }
+        h2 { font-size: 22px; color: #1a252f; margin-bottom: 8px; text-align: center; }
+        p.subtitle { text-align: center; font-size: 14px; color: #666; margin-bottom: 24px; }
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #444; }
+        input[type="text"] { width: 100%; padding: 12px 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 15px; outline: none; transition: border-color 0.2s; }
+        input[type="text"]:focus { border-color: #0056b3; }
+        .btn-submit { width: 100%; background-color: #0056b3; color: #fff; padding: 12px; border: none; border-radius: 6px; font-size: 16px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        .btn-submit:hover { background-color: #004085; }
+        .result-box { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; font-size: 14px; line-height: 1.5; }
+        .result-none { background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        .result-found { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .back-link { display: block; text-align: center; margin-top: 20px; text-decoration: none; font-size: 14px; color: #0056b3; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Track Application / Complaint</h2>
+    <p class="subtitle">Enter your Reference ID or IP Address to check status</p>
+
+    <div class="input-group">
+        <label for="trackId">Reference Ticket ID / IP Address</label>
+        <input type="text" id="trackId" placeholder="e.g. GRV-2026-8910 or IP Address">
+    </div>
+
+    <button class="btn-submit" onclick="checkStatus()">Search Status</button>
+
+    <div id="statusResult" class="result-box"></div>
+
+    <a href="index.html" class="back-link">&larr; Back to Home</a>
+</div>
+
+<script>
+    function checkStatus() {
+        const inputVal = document.getElementById('trackId').value.trim();
+        const resultDiv = document.getElementById('statusResult');
+
+        if (!inputVal) {
+            alert('Please enter a Reference ID or IP address.');
+            return;
+        }
+
+        // Simulating Status Check Logic
+        // In real use, this checks local storage or backend DB
+        const hasSubmitted = localStorage.getItem('hasSubmittedForm');
+
+        resultDiv.style.display = 'block';
+
+        if (!hasSubmitted && inputVal.length < 8) {
+            resultDiv.className = 'result-box result-none';
+            resultDiv.innerHTML = `<strong>No Submission Found:</strong><br>No grievance record or submission history found for this IP / Reference ID yet. Please submit a form first.`;
+        } else {
+            resultDiv.className = 'result-box result-found';
+            resultDiv.innerHTML = `<strong>Status: Under Review</strong><br>Ticket ID: <b>${inputVal}</b><br>Your submission has been logged and is being processed by designated authorities.`;
+        }
+    }
+</script>
+
+</body>
+</html>

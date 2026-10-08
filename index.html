@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoadGuard AI | Public Infrastructure Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        /* Top Header Navigation */
+        .top-bar {
+            background-color: #1e293b;
+            color: #ffffff;
+            padding: 10px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .top-bar a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        /* Main Header */
+        header {
+            background-color: #ffffff;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .logo-container h1 {
+            color: #0f172a;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo-container p {
+            color: #64748b;
+            font-size: 13px;
+        }
+
+        .header-btn {
+            background-color: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .header-btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #0f172a;
+            padding: 0 8%;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li a {
+            display: block;
+            color: #cbd5e1;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #1e293b;
+            color: #ffffff;
+        }
+
+        /* Hero Banner Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            color: white;
+            padding: 60px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-content {
+            max-width: 55%;
+        }
+
+        .badge {
+            background-color: #f97316;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #94a3b8;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-primary {
+            background-color: #ea580c;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-secondary {
+            border: 1px solid #475569;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Services Grid Section */
+        .services-section {
+            padding: 50px 8%;
+        }
+
+        .services-section h3 {
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: #0f172a;
+            border-left: 4px solid #2563eb;
+            padding-left: 10px;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            position: relative;
+        }
+
+        .step-tag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #eff6ff;
+            color: #2563eb;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .card h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Form Entry Section */
+        .form-entry-container {
+            text-align: center;
+            margin-top: 40px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .enter-form-btn {
+            background-color: #16a34a;
+            color: white;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .enter-form-btn:hover {
+            background-color: #15803d;
+        }
+
+        /* Clean Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            padding: 40px 8% 20px;
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-col h5 {
+            color: white;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-col ul li a {
+            color: #94a3b8;
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #1e293b;
+            padding-top: 20px;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="logo-container">
+            <h1>RoadGuard AI</h1>
+            <p>Infrastructure Quality & Inspection Portal</p>
+        </div>
+        <a href="#form-section" class="header-btn">File Issue</a>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#form-section">File Audit / Complaint</a></li>
+            <li><a href="track.html">Track Status</a></li>
+            <li><a href="#">Guidelines</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">Public Portal</span>
+            <h2>Transparency & AI Audit for Quality Roads</h2>
+            <p>Submit geotagged road structural defect reports. Powered by cryptographic verification and structured inspection workflows.</p>
+            <div class="hero-buttons">
+                <a href="#form-section" class="btn-primary">Report Defect</a>
+                <a href="#" class="btn-secondary">Track Status</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Services -->
+    <section class="services-section">
+        <h3>Key Portal Services</h3>
+        <div class="cards-container">
+            <div class="card">
+                <span class="step-tag">Step 01</span>
+                <h4>Geotagged Issue Capture</h4>
+                <p>Upload clear images of potholes, cracks, or substandard contractor work with automated GPS data recording.</p>
+                <a href="#form-section" class="card-btn">Initiate Submission &rarr;</a>
+            </div>
+            <div class="card">
+                <span class="step-tag">Step 02</span>
+                <h4>Cryptographic Verification</h4>
+                <p>Audit records are secured with hash verification stamps to ensure evidence integrity throughout processing.</p>
+                <a href="#" class="card-btn">Read Security Protocols &rarr;</a>
+            </div>
+            <div class="card">
+                <span class="step-tag">Step 03</span>
+                <h4>Automated Dispatch</h4>
+                <p>Grievances are processed and routed directly to designated monitoring authorities for inspection.</p>
+                <a href="#" class="card-btn">View Dispatch Routing &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Single Form Entry Button -->
+        <div class="form-entry-container" id="form-section">
+    <a href="https://roadguard-app-gihk8mrgegsyz6ymsfexbs.streamlit.app/" target="_self" style="text-decoration: none;">
+        <button class="enter-form-btn" type="button">Enter to Form</button>
+    </a>
+</div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h5>RoadGuard AI</h5>
+                <p>Designed for public infrastructure quality monitoring and reporting.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Important Links</h5>
+                <ul>
+                    <li><a href="#">Portal Terms</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Policies</h5>
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 RoadGuard AI Portal. All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
